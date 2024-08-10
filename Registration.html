@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>Registration</title>
+        <link rel="stylesheet" type="text/css" href="style1.css">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Registration Form</h2>
+        <form id="passwordForm">
+            <label for="name">Name:</label><br>
+            <input style="width: 450px;" type="text" id="name" name="name" required><br>
+            <label for="email">Email:</label><br>
+            <input style="width: 450px;" type="email" id="email" name="email" required><br>
+            <label for="password">Password:</label><br>
+            <input style="width: 450px;" type="password" id="password" name="password" required><br>
+            <label for="confirmPassword">Confirm Password:</label><br>
+            <input style="width: 450px;" type="password" id="confirmPassword" name="password" required><br>
+            <label for="date">Date of Birth:</label><br>
+            <input style="width: 450px;" type="date" id="date" name="date" placeholder="dd/mm/yyyy" required><br>
+            <label for="Gender">Gender:</label><br>
+            <select id="Gender" name="Gender" required><br>
+                <option value="">Select Gender</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select><br>
+            <label for="address">Address:</label><br>
+            <input style="width: 450px;" type="address" id="address" name="address" required><br>
+            <label>Phone Number:</label><br>
+            <input style="width: 450px;" type="int" id="number" name="phone number" required><br>
+            <b>Interests:</b><br>
+            <input type="checkbox" name="interests" value="Sports">Sports
+            <input type="checkbox" name="interests" value="Music">Music
+            <input type="checkbox" name="interests" value="Reading">Reading
+            <input type="checkbox" name="interests" value="Travel">Travel
+            <br><button  type="submit">Submit</button>
+        </form>
+        </div>
+        <script>
+          document.getElementById('passwordForm').addEventListener('submit', function(event) {
+              event.preventDefault();
+              const password = document.getElementById('password').value;
+              const confirmPassword = document.getElementById('confirmPassword').value;
+      
+              if (password !== confirmPassword) {
+                  alert('Passwords do not match!');
+              } else {
+                  alert('Registration Successful.');
+              }
+          });
+      </script>
+    </body>
+   </html>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--<script>
+            const data = document.getElementById('myform');
+            data.addEventListener('submit', function(event) {
+              event.preventDefault();
+              const sir = new FormData(data);
+              const pass = sir.get('password1');
+              const pass1 =  sir.get('confirm-password2');
+
+              if (pass !== pass1){
+                alert('wrong password');
+              }  
+              else{
+                 alert('all good');
+                }
+            
+              alert('successful registration');
+              form.submit();
+            });
+          </script>
+    </body>
+</html> -->

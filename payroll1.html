@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Monthly Payroll </title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width:800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .dashboard {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      background-color: beige;
+    }
+    .dashboard-item {
+      flex-basis: 25%;
+      background-color: #f5f5f5;
+      padding: 5px;
+      text-align: center;
+      width: 100%;
+      height: 50%;
+    }
+    .dashboard-item h3 {
+      margin-bottom: 20px;
+      color: #00b8d4;
+      display: flex;
+      align-items: flex-end;
+      flex-direction: column;
+      font-weight: bold;
+      width: 100%;
+      height: 50%;
+    }
+    .dashboard-item p {
+      font-size: 24px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 50%;
+      font-weight: bold;
+    }
+    .circle{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: relative;
+        margin: 0 auto 10px;
+    }
+    .circle::before{
+        content: '';
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #circle1{
+        background: conic-gradient(#00b8d4 0% 80%, rgb(131, 131, 207) 0% 100%);
+    }
+    .dashboard-item:first-child {
+      background-color: whitesmoke;
+      color: black;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+    td {
+      padding: 10px;
+      text-align: left;
+      border: 2px solid #dddddd;
+     
+    }
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    th {
+        background-color: #00b8d4;
+        padding: 10px;
+        text-align: left;
+    }
+    tfoot {
+      background-color: rgb(87, 186, 222);
+      font-weight: lighter;
+      padding: 2px;
+    }
+    
+    .headings{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-content: space-between;
+      color: grey;
+      cursor: pointer;
+    }
+    headings:hover {
+      background-color: beige;
+    }
+    .search-bar p{
+      background-color: #dddddd;
+      color: grey;
+      padding: 8px 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      width: 50%;
+      
+    }
+    
+
+
+
+   /* button {
+        background-color: antiquewhite;
+        color: black;
+        padding: 8px 10px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        width: 50%;
+        display: flex;
+       justify-content: space-between;
+
+    }
+    button:hover {
+        background-color: beige;
+    } */
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Monthly Payroll Management Dashboard With Employee Cost</h2>
+            <h6>The following slide highlights the monthly payroll management dashboard with employee cost illustrating key headings which includes 
+                total employee cost, gross pay, employer pension, employer insurance, employee, job title, pay schedule
+                and last paid
+  </h6>
+    <div class="dashboard">
+      <div class="dashboard-item">
+        <h3>Total employee cost</h3>
+        <p>$45,567</p>
+      </div>
+      <div class="dashboard-item">
+        <h3>Gross Pay</h3>
+        <p>$4354</p>
+      </div>
+      <div class="dashboard-item">
+        <h3>Employer Pension</h3>
+        <p>$4578</p>
+      </div>
+      <div class="dashboard-item">
+        <h3>Employee Insurance</h3>
+        <p>$2376</p>
+      </div>
+      <div class="dashboard-item">
+        <div class="circle" id="circle1"></div>
+        </div>
+    </div>
+    <div class="headings">
+        <h3 class="heading" data-table="employees">Employees</h3>
+        <h3 class="heading" data-table="payRuns">Pay Runs</h3>
+        <h3 class="heading" data-table="ApprovedLeave">Approved Leave</h3>
+        <h3 class="heading" data-table="Reports">Reports</h3>
+        <h3 class="heading" data-table="Payroll settings">Payroll settings</h3>
+      </div>
+      <div class="table-container">
+        <div class="search-bar">
+          <p> Find an Employee <input type="text" placeholder="Search..." class="search-input" ></p>
+        </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Job title</th>
+          <th>Pay schedule</th>
+          <th>Last paid</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4"></td>
+        </tr>
+      </tfoot>
+    </table>
+    </div>
+</div>
+  <script>
+    // JavaScript code to populate the employee table
+    const headings = document.querySelectorAll('.heading');
+    const tableContainer = document.querySelector('.table-container');
+    const dataTable = document.querySelector('.data-table tbody');
+    const searchInput = document.querySelector('.search-input');
+
+    const data = {
+        employees: [
+      { name: "Job Rogan", jobTitle: "Bookkeeper", paySchedule: "Monthly", lastPaid: "Nov 31 2023" },
+      { name: "Tom Regan", jobTitle: "Manager", paySchedule: "Monthly", lastPaid: "Nov 31 2023" },
+      { name: "Thomas S.", jobTitle: "Store Manager", paySchedule: "Monthly", lastPaid: "Nov 31 2023" },
+      { name: "Shawn M.", jobTitle: "Contractor", paySchedule: "Weekly", lastPaid: "Nov 31 2023" },
+      { name: "Add Text Here", jobTitle: "Add Text Here", paySchedule: "Add Text Here", lastPaid: "Mon DD YYYY" },
+      { name: "Add Text Here", jobTitle: "Add Text Here", paySchedule: "Add Text Here", lastPaid: "Mon DD YYYY" }
+    ]
+    };
+    
+    headings.forEach(heading => {
+  heading.addEventListener('click', () => {
+    const tableName = heading.dataset.table;
+    displayTable(tableName);
+  });
+});
+    searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.toLowerCase();
+  filterTable(searchTerm);
+});
+
+function displayTable(tableName) {
+  tableContainer.style.display = 'block';
+  dataTable.innerHTML = '';
+
+  const tableData = data[tableName];
+  tableData.forEach(item => {
+    const row = document.createElement('tr');
+    Object.values(item).forEach(value => {
+      const cell = document.createElement('td');
+      cell.textContent = value;
+      row.appendChild(cell);
+    });
+    dataTable.appendChild(row);
+  });
+}
+
+function filterTable(searchTerm) {
+  const rows = dataTable.getElementsByTagName('tr');
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    let visible = false;
+    for (let j = 0; j < row.cells.length; j++) {
+      const cell = row.cells[j];
+      if (cell.textContent.toLowerCase().includes(searchTerm)) {
+        visible = true;
+        break;
+      }
+    }
+    row.style.display = visible ? 'table-row' : 'none';
+  }
+}
+
+
+
+
+    /*const employeeTableBody = document.getElementById("employee-table-body");
+
+    employeeData.forEach(employee => {
+      const row = document.createElement("tr");
+
+      const nameCell = document.createElement("td");
+      nameCell.textContent = employee.name;
+      row.appendChild(nameCell);
+
+      const jobTitleCell = document.createElement("td");
+      jobTitleCell.textContent = employee.jobTitle;
+      row.appendChild(jobTitleCell);
+
+      const payScheduleCell = document.createElement("td");
+      payScheduleCell.textContent = employee.paySchedule;
+      row.appendChild(payScheduleCell);
+
+      const lastPaidCell = document.createElement("td");
+      lastPaidCell.textContent = employee.lastPaid;
+      row.appendChild(lastPaidCell);
+
+      employeeTableBody.appendChild(row);
+    });  */
+  </script>
+</body>
+</html>
+
